@@ -12,4 +12,5 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByAuthor(User user, Sort sort);
     List<Task> findByCategory(Category category);
+    List<Task> findTaskByTitleContainingIgnoreCase(String q);
 }

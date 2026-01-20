@@ -28,7 +28,7 @@ public class UserService {
                         .password(encoder.encode(request.getPassword()))
                         .email(request.getEmail())
                         .fullname(request.getFullname())
-                        .role(UserRole.USER)
+                        .role(UserRole.ADMIN)   // Temporalmente para que todos los usuarios sean ADMIN, en producción se cambiaría obviamente.
                         .build()
         );
 

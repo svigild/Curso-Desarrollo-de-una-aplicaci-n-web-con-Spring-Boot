@@ -1,71 +1,122 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>New user</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+    <title>Register | TaskHive</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
-        main {
-            margin-top: 25px;
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
+        .register-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px; /* Tarjeta más ancha */
+            border: none;
+        }
+
+        .register-header {
+            background: #0d6efd;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label {
+            color: #0d6efd;
+            transform: scale(.85) translateY(-0.5rem) translateX(0.15rem);
+        }
+
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+        }
+
+        .btn-register {
+            padding: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
-<body class="d-flex flex-column h-100">
+<body>
 
-
-<nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
-    <div class="container-fluid">
-        <h1 class="d-flex align-items-center fs-4 text-white mb-0">
-            <img src="../static/img/logo.svg" th:src="@{/img/logo.svg}"
-                 width="38" height="30" class="me-3" alt="Bootstrap">
-            TaskHive
-        </h1>
+<main class="register-card">
+    <div class="register-header">
+        <div class="mb-2"><i class="bi bi-hexagon-fill fs-2"></i></div>
+        <h3 class="fw-bold mb-0">Join TaskHive</h3>
+        <p class="opacity-75 mb-0">Create your account to start managing tasks</p>
     </div>
-</nav>
-<main class="flex-shrink-0">
-    <h1 class="text-center">Register new user</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form action="#" th:action="@{/auth/register/submit}" method="post" th:object="${user}">
-                    <div class="mb-3">
-                        <label for="inputFullname" class="form-label">Fullname</label>
-                        <input type="text" class="form-control" id="inputFullname" th:field="*{fullname}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="inputUsername" th:field="*{username}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="inputEmail" th:field="*{email}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword1" th:field="*{password}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputPassword2" class="form-label">Repeat Password</label>
-                        <input type="password" class="form-control" id="inputPassword2" th:field="*{verifyPassword}">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
 
+    <div class="p-4 p-md-5">
+        <form action="#" th:action="@{/auth/register/submit}" method="post" th:object="${user}" class="row g-3">
+
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="inputFullname" th:field="*{fullname}" placeholder="John Doe" required>
+                    <label for="inputFullname">Full Name</label>
+                </div>
             </div>
-        </div>
-    </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="inputUsername" th:field="*{username}" placeholder="jdoe" required>
+                    <label for="inputUsername">Username</label>
+                </div>
+            </div>
 
-</main>
-<footer class="footer mt-auto py-3 bg-light fixed-bottom">
-    <div class="container">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
-        <span class="text-muted">TaskHive - Sergio Vigil Díaz</span>
+            <div class="col-12">
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="inputEmail" th:field="*{email}" placeholder="name@example.com" required>
+                    <label for="inputEmail">Email Address</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="inputPassword1" th:field="*{password}" placeholder="Password" required>
+                    <label for="inputPassword1">Password</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="inputPassword2" th:field="*{verifyPassword}" placeholder="Confirm Password" required>
+                    <label for="inputPassword2">Confirm Password</label>
+                </div>
+            </div>
+
+            <div class="col-12 mt-4">
+                <button type="submit" class="btn btn-primary w-100 btn-register shadow-sm">
+                    Create Account
+                </button>
+            </div>
+
+            <div class="col-12 text-center mt-3">
+                <span class="text-muted small">Already have an account?</span>
+                <a th:href="@{/login}" class="text-decoration-none fw-bold ms-1">Sign in</a>
+            </div>
+        </form>
     </div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</main>
+
+<div class="fixed-bottom text-center pb-3 text-muted small">
+    TaskHive &copy; 2026 - Created by Sergio Vigil Díaz
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

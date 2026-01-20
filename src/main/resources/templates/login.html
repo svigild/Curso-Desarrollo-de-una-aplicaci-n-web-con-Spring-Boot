@@ -1,84 +1,136 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet" />
+    <title>Login | TaskHive</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
-        html,
         body {
-            height: 100%;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            overflow: hidden; /* Evita scroll */
         }
 
-        body {
+        /* Lado Izquierdo (Arte/Marca) */
+        .login-brand-side {
+            background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Círculos decorativos de fondo */
+        .circle-decoration {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        .c1 { width: 300px; height: 300px; top: -50px; left: -50px; }
+        .c2 { width: 500px; height: 500px; bottom: -100px; right: -100px; }
+
+        /* Lado Derecho (Formulario) */
+        .login-form-side {
+            background-color: #fff;
             display: flex;
             align-items: center;
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: #f5f5f5;
+            justify-content: center;
+            padding: 2rem;
         }
 
-        .form-signin {
+        .login-container {
             width: 100%;
-            max-width: 330px;
-            padding: 15px;
-            margin: auto;
+            max-width: 400px;
         }
 
-        .form-signin .checkbox {
-            font-weight: 400;
+        .form-control {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+        .form-control:focus {
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
         }
 
-        .form-signin .form-floating:focus-within {
-            z-index: 2;
-        }
-
-        .form-signin input[type="email"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-
-        .form-signin input[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
+        /* Ajuste móvil */
+        @media (max-width: 768px) {
+            .login-brand-side { display: none; }
+            body { overflow: auto; }
         }
     </style>
-
 </head>
-<body class="text-center">
-<main class="form-signin">
-    <form method="POST" action="#" th:action="@{/login}">
-        <img class="mb-4" src="../static/img/logo.svg" th:src="@{/img/logo.svg}" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-        <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Login error</strong> Bad credentials
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <div class="form-floating">
-            <input type="text" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address or username</label>
-        </div>
-        <div class="form-floating">
-            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-        </div>
+<body class="row g-0">
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <a class="w-100 btn btn-lg btn-secondary" style="margin-top:10px;" th:href="@{/auth/register}">Sign up</a>
-
-    </form>
-</main>
-<footer class="footer mt-auto py-3 bg-light fixed-bottom">
-    <div class="container">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
-        <span class="text-muted">TaskHive - Sergio Vigil Díaz</span>
+<div class="col-md-6 col-lg-7 login-brand-side">
+    <div class="circle-decoration c1"></div>
+    <div class="circle-decoration c2"></div>
+    <div class="z-1"> <div class="mb-4">
+        <i class="bi bi-hexagon-fill fs-1"></i>
     </div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <h1 class="display-4 fw-bold mb-3">Welcome to TaskHive</h1>
+        <p class="lead opacity-75">
+            Manage your tasks efficiently, collaborate with your team, and stay organized in one place.
+        </p>
+    </div>
+    <div class="mt-auto z-1 opacity-50 small">
+        &copy; 2026 TaskHive Inc.
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-5 login-form-side">
+    <div class="login-container">
+
+        <div class="mb-5">
+            <h2 class="fw-bold mb-2">Sign In</h2>
+            <p class="text-muted">Enter your details to access your account</p>
+        </div>
+
+        <div th:if="${param.error}" class="alert alert-danger d-flex align-items-center mb-4" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <div>Bad credentials. Please try again.</div>
+        </div>
+
+        <form method="POST" action="#" th:action="@{/login}">
+
+            <div class="mb-3">
+                <label class="form-label fw-bold small text-secondary">EMAIL OR USERNAME</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope"></i></span>
+                    <input type="text" name="username" class="form-control border-start-0 ps-0" placeholder="name@example.com" required>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="d-flex justify-content-between">
+                    <label class="form-label fw-bold small text-secondary">PASSWORD</label>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock"></i></span>
+                    <input type="password" name="password" class="form-control border-start-0 ps-0" placeholder="••••••••" required>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 mb-4">
+                <button class="btn btn-primary btn-lg shadow-sm" type="submit">Sign In</button>
+            </div>
+
+            <div class="text-center text-muted">
+                Don't have an account?
+                <a th:href="@{/auth/register}" class="text-decoration-none fw-bold">Sign up for free</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

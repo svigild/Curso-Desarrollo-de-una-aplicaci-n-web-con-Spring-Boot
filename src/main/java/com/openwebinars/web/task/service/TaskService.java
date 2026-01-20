@@ -127,4 +127,19 @@ public class TaskService {
         taskRepository.saveAll(tasks);
         return tasks;
     }
+
+    // Buscar categorías
+    public List<Task> searchTasks(String query){
+        // Obtengo TODAS las tareas
+        List<Task> allTasks = taskRepository.findAll();
+
+        // Si la consulta está vacía, devuelvo todo
+        if (query == null || query.isEmpty())
+            return allTasks;
+
+        // Compruebo para cada tarea si coincide en el título o el autor con el texto introducido en la search bar (query)
+        List<Task> resultado = taskRepository.findTaskByTitleContainingIgnoreCase(query);
+
+        return resultado;
+    }
 }
