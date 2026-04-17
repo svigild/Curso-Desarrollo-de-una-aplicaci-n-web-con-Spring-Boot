@@ -62,16 +62,48 @@ El sistema cuenta con dos roles principales: **USER** y **ADMIN**.
 ## Configuración e Instalación
 
 ### 1. Requisitos Previos
-- JDK 17 o superior.
-- Maven instalado (o usar el wrapper `mvnw`).
-- Servidor MySQL en ejecución.
+* **Java:** JDK 17 o superior (Desarrollado y probado con JDK 23).
+* **Docker:** Docker Desktop instalado y en ejecución.
+* **Maven:** Para la gestión de dependencias y construcción.
 
-### 2. Configuración de Base de Datos
-Crea una base de datos en MySQL llamada `task_db`.
-Edita `src/main/resources/application.properties`:
+### 2. Infraestructura de Base de Datos (Docker)
+Este proyecto utiliza un contenedor independiente de **MySQL 8.0**. Para inicializar la base de datos con las credenciales configuradas, ejecuta el siguiente comando en tu terminal:
 
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/task_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-spring.datasource.username=TU_USUARIO
-spring.datasource.password=TU_CONTRASEÑA
+```bash
+docker run --name mysql_container \
+  -e MYSQL_ROOT_PASSWORD=root \
+  -p 3306:3306 \
+  -d mysql:8.0
+```
+Nota: Se ha utilizado la base de datos interna mysql por defecto para facilitar la conexión inmediata. El contenedor mapea el puerto 3306 hacia localhost.
+
+### 3. Propiedades de la Aplicación
+El archivo src/main/resources/application.properties debe mantenerse con la siguiente configuración para asegurar la conexión con el contenedor Docker:
+
+```bash
+spring.application.name=web
+
+# Configuración para MySQL en Docker
+spring.datasource.url=jdbc:mysql://localhost:3306/mysql?createDatabaseIfNotExist=true
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# Hibernate
 spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+```
+
+### 4. Ejecución
+Para arrancar la aplicación, utiliza tu IDE o ejecuta el siguiente comando en la raíz del proyecto:
+
+```bash
+mvn spring-boot:run
+```
+
+### 5. Roles de Administrador (Importante)
+La aplicación gestiona permisos especiales basados en el correo electrónico. Si deseas acceder al panel de administración (/admin/), debes registrarte con alguno de los siguientes correos electrónicos autorizados:
+🔑 admin@openwebinars.net
+🔑 sergio3vd@gmail.com
+🔑 user@user.com
